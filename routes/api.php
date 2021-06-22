@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GallerieController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,9 @@ use App\Http\Controllers\GallerieController;
 
 Route::get('/galleries',[GallerieController::class,'index']);
 Route::get('/galleries/{id}',[GallerieController::class,'show']);
+
+
+Route::post('register', [ AuthController::class, 'register' ])->middleware('guest:api');
+Route::post('login', [ AuthController::class, 'login' ])->middleware('guest:api');
+Route::post('logout', [ AuthController::class, 'logout' ])->middleware('auth:api');
+Route::get('me', [ AuthController::class, 'me' ])->middleware('auth:api');
