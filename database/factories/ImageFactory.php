@@ -1,19 +1,19 @@
 <?php
 
 namespace Database\Factories;
-use Illuminate\Support\Str;
+
+use App\Models\Image;
 use App\Models\Gallerie;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class GallerieFactory extends Factory
+class ImageFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Gallerie::class;
+    protected $model = Image::class;
 
     /**
      * Define the model's default state.
@@ -23,9 +23,8 @@ class GallerieFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'description' => $this->faker->text(100),
-            'user_id' => User::inRandomOrder()->first()->id,
+            'source' => 'https://images.saatchiart.com/saatchi/1311333/art/6500245/5569923-XWNAROKS-7.jpg',
+            'gallerie_id' => Gallerie::inRandomOrder()->first()->id,
         ];
     }
 }
