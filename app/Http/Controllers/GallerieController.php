@@ -11,12 +11,11 @@ class GallerieController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
-  {
-    $galleries = Gallerie::all();
-
+  public function index(){
+    $results = Gallerie::with('user', 'images');
+    $galleries = $results->get();
     return response()->json($galleries);
-  }
+}
 
   /**
    * Store a newly created resource in storage.
@@ -35,12 +34,9 @@ class GallerieController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function show($id)
-  {
-    $gallerie = Gallerie::findOrFail($id);
+  public function show($id){
 
-    return response()->json($gallerie);
-  }
+}
 
   /**
    * Update the specified resource in storage.
