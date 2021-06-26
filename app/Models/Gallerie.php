@@ -34,10 +34,15 @@ class Gallerie extends Model
 
         return $this->images()->create([
             'source' => $source,
-            'gallery_id' => $id
+            'gallerie_id' => $id
         ]);
 
     }
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+
 
 
 

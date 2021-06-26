@@ -44,7 +44,7 @@ class AuthController extends Controller
 
   public function logout() {
 
-    $result = auth('api')->logout();
+    $result =  auth('api')->logout();
 
     return response()->json(['success' => true]);
 
