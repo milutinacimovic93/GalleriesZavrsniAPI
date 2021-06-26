@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Gallerie;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CommentRequest;
 use Illuminate\Http\Request;
 use App\Models\Comment;
@@ -14,7 +14,7 @@ class CommentController extends Controller
 
         info($request);
 
-        $user = auth('api')->user();
+        $user = Auth('api')->user();
 
         $comment = new Comment();
         $comment->user_id = $user->id;

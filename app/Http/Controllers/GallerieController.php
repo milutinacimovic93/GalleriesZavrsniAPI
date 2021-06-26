@@ -30,6 +30,19 @@ class GallerieController extends Controller
    */
   public function store(CreateGalleryRequest $request)
     {
+        $data = $request->validated();
+        $user = User::findOrFail($request['id']);
+        $user_id = $user->id;
+        $gallerie= Gallerie::create([
+            "name"=>$data['name'],
+            "description"=>$data['description'],
+            'user_id' => $user_id
+        ]);
+        foreach($data['listOfSource'] as $source) {
+            $gallerie->addImages($source, $gallerie['id']);
+        }
+
+        return response()->json($gallerie);
     }
 
   /**
@@ -40,22 +53,7 @@ class GallerieController extends Controller
    */
   public function show($id){
 
-    $gallerie = Gallerie::findOrFail($id);
-        $images = $gallerie->images;
-        $user = $gallerie->user;
-        $comments = $gallerie->comments;
-        $results= [
-            'id' => $gallerie->id,
-            'name'=>$gallerie->name,
-            'description'=>$gallerie->description,
-            'created_at'=>$gallerie->created_at,
-            'updated_at'=>$gallerie->updated_at,
-            'images'=>$images,
-            'user'=>$user,
-            'comments'=>$comments
-        ];
-
-        return response()->json($results);
+    return Gallerie::with('photos')->with('user')->with('comments')->find($id);
 
 }
 
@@ -79,6 +77,6 @@ class GallerieController extends Controller
    */
   public function destroy($id)
   {
-
+    return Gallerie::find($id)->delete();
   }
 }

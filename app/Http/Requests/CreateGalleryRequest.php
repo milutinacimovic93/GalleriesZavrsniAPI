@@ -22,7 +22,8 @@ class CreateGalleryRequest extends FormRequest
         return [
             "name"=> "required | string | min:2 | max:255",
             "description"=>'sometimes | string | max:1000',
-            'source' => ['required', 'string', 'url', 'regex' => 'regex:/.(jpg|png)($|\?.*)/']
+            'source' => ['required', 'string', 'url', 'regex' => 'regex:/.(jpg|png)($|\?.*)/'],
+            'user_id' => 'required | integer',
         ];
     }
 }
